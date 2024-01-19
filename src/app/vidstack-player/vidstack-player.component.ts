@@ -17,33 +17,21 @@ export class VidstackPlayerComponent {
   }
 
   loadStyles(reload?: boolean) {
-    const oldElement = document.getElementById('load-vidstack-css') as HTMLLinkElement | null;
-    if (!reload && oldElement) {
-      // console.log('Already loaded!');
-      return;
-    }
-
     [
-      'https://cdn.jsdelivr.net/npm/vidstack@^1.0.0/player/styles/default/theme.min.css',
-      'https://cdn.jsdelivr.net/npm/vidstack@^1.0.0/player/styles/default/layouts/video.min.css',
-      // 'assets/libs/vidstack/player/styles/base.css',
-      // 'assets/libs/vidstack/player/styles/default/buffering.css',
-      // 'assets/libs/vidstack/player/styles/default/buttons.css',
-      // 'assets/libs/vidstack/player/styles/default/captions.css',
-      // 'assets/libs/vidstack/player/styles/default/chapter-title.css',
-      // 'assets/libs/vidstack/player/styles/default/controls.css',
-      // 'assets/libs/vidstack/player/styles/default/gestures.css',
-      // 'assets/libs/vidstack/player/styles/default/icons.css',
-      // 'assets/libs/vidstack/player/styles/default/menus.css',
-      // 'assets/libs/vidstack/player/styles/default/poster.css',
-      // 'assets/libs/vidstack/player/styles/default/sliders.css',
-      // 'assets/libs/vidstack/player/styles/default/theme.css',
-      // 'assets/libs/vidstack/player/styles/default/thumbnail.css',
-      // 'assets/libs/vidstack/player/styles/default/time.css',
-      // 'assets/libs/vidstack/player/styles/default/tooltips.css',
-    ].forEach(css => {
+      // 'https://cdn.jsdelivr.net/npm/vidstack@^1.9.8/player/styles/default/theme.min.css',
+      // 'https://cdn.jsdelivr.net/npm/vidstack@^1.9.8/player/styles/default/layouts/video.min.css',
+
+      'assets/libs/vidstack/player/styles/default/theme.css',
+      'assets/libs/vidstack/player/styles/default/layouts/video.css',
+    ].forEach((css, i) => {
+      const oldElement = document.getElementById('load-vidstack-css') as HTMLLinkElement | null;
+      if (!reload && oldElement) {
+        // console.log('Already loaded!');
+        return;
+      }
+
       const linkcss = document.createElement('link');
-      linkcss.setAttribute('id', 'load-vidstack-css');
+      linkcss.setAttribute('id', `load-vidstack-css-${i}`);
       linkcss.rel = 'stylesheet';
       linkcss.href = css;
 
@@ -84,8 +72,8 @@ export class VidstackPlayerComponent {
     const script = document.createElement('script');
     script.setAttribute('id', 'load-vidstack-js');
     script.type = 'module';
-    script.src = 'https://cdn.jsdelivr.net/npm/vidstack@^1.0.0/cdn/with-layouts/vidstack.js';
-    // script.src = 'assets/libs/vidstack/cdn/vidstack.js';
+    // script.src = 'https://cdn.jsdelivr.net/npm/vidstack@^1.9.8/cdn/with-layouts/vidstack.js';
+    script.src = 'assets/libs/vidstack/cdn/with-layouts/vidstack.js';
 
     if (oldElement) {
       oldElement.replaceWith(script);
